@@ -1,0 +1,4 @@
+[submodule "panku_console"]
+	path = panku_console
+	url = https://github.com/Ark2000/panku_console
+  ignore = dirty
