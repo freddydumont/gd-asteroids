@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bmhl4tjaesyu3"]
+
+[ext_resource type="Texture2D" uid="uid://corpfq0dn5auc" path="res://assets/simpleSpace_tilesheet.png" id="1_ukqy0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_702qv"]
+atlas = ExtResource("1_ukqy0")
+region = Rect2(784, 16, 96, 96)
+
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_702qv")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PackedVector2Array(0, -48, -48, 32, -32, 48, -16, 32, 16, 32, 32, 48, 48, 32)

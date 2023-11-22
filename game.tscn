@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ciau5jq4j2y88"]
+[gd_scene load_steps=3 format=3 uid="uid://ciau5jq4j2y88"]
 
 [ext_resource type="Texture2D" uid="uid://ckxbg2ajjexda" path="res://assets/Wallpaper2d.jpg" id="1_1rubd"]
+[ext_resource type="PackedScene" uid="uid://bmhl4tjaesyu3" path="res://player.tscn" id="2_we304"]
 
 [node name="Game" type="Node2D"]
 
@@ -20,3 +21,5 @@ offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_1rubd")
+
+[node name="Player" parent="." instance=ExtResource("2_we304")]
