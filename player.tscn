@@ -25,7 +25,8 @@ texture = SubResource("AtlasTexture_702qv")
 
 [node name="Thruster" type="Sprite2D" parent="Sprite2D"]
 show_behind_parent = true
-position = Vector2(0.000318559, 88)
+position = Vector2(2.08165e-12, 32)
+scale = Vector2(1, 0.01)
 texture = SubResource("AtlasTexture_g4ofm")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
