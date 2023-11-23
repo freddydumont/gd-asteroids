@@ -21,6 +21,9 @@ func _physics_process(_delta):
 	thrust = Vector2.ZERO
 	if Input.is_action_pressed("ui_up"):
 		thrust = transform.x * thrust_force
+		$Sprite2D/Thruster.show()
+	else:
+		$Sprite2D/Thruster.hide()
 
 	rotation_dir = Input.get_axis("ui_left", "ui_right")
 
