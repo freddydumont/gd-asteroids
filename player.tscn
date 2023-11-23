@@ -31,6 +31,29 @@ position = Vector2(2.08165e-12, 32)
 scale = Vector2(1, 0.01)
 texture = SubResource("AtlasTexture_g4ofm")
 
+[node name="LateralThrusterLeft" type="CPUParticles2D" parent="Sprite2D"]
+position = Vector2(-24, -8)
+rotation = 3.14159
+emitting = false
+amount = 80
+lifetime = 0.15
+spread = 10.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 2000.0
+initial_velocity_max = 3000.0
+linear_accel_max = 70.71
+
+[node name="LateralThrusterRight" type="CPUParticles2D" parent="Sprite2D"]
+position = Vector2(24, -8)
+emitting = false
+amount = 80
+lifetime = 0.15
+spread = 10.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 2000.0
+initial_velocity_max = 3000.0
+linear_accel_max = 70.71
+
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 rotation = 1.5708
 build_mode = 1

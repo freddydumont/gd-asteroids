@@ -33,6 +33,16 @@ func _input(_event):
 			ThrusterState.ENGAGED:
 				animate_thruster(true)
 
+	# lateral thrusters
+	if Input.is_action_just_pressed("ui_right"):
+		$LateralThrusterLeft.emitting = true
+	elif Input.is_action_just_released("ui_right"):
+		$LateralThrusterLeft.emitting = false
+	if Input.is_action_just_pressed("ui_left"):
+		$LateralThrusterRight.emitting = true
+	elif Input.is_action_just_released("ui_left"):
+		$LateralThrusterRight.emitting = false
+
 
 ## Thruster animation is a single texture that's scaled and moved
 ## to simulate the engine's increasing power. It's tweened back to
@@ -42,7 +52,7 @@ func animate_thruster(reset: bool = false):
 	tween.set_parallel()
 	tween.connect("finished", _on_Tween_tween_completed)
 	if reset:
-		tween.tween_property(thruster, "position:y", initial_position_y, animation_duration * 2 )
+		tween.tween_property(thruster, "position:y", initial_position_y, animation_duration * 2)
 		tween.tween_property(thruster, "scale:y", initial_scale_y, animation_duration * 2)
 		animation_state = ThrusterState.DISENGAGING
 	else:
