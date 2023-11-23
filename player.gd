@@ -9,6 +9,8 @@ extends RigidBody2D
 @onready var thruster: Sprite2D = $Sprite2D/Thruster
 @onready var initial_position_y := thruster.position.y
 @onready var initial_scale_y := thruster.scale.y
+@onready var final_position_y := 88.0
+@onready var final_scale_y := 1.0
 
 enum ThrusterState { IDLE, ENGAGING, ENGAGED, DISENGAGING }
 
@@ -49,22 +51,6 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	)
 
 
-func animate_thruster():
-	tween = create_tween()
-	tween.connect("finished", _on_Tween_tween_completed)
-	tween.tween_property(thruster, "position:y", 88, animation_duration)
-	tween.parallel().tween_property(thruster, "scale:y", 1, animation_duration)
-	animation_state = ThrusterState.ENGAGING
-
-
-func reset_thruster():
-	tween = create_tween()
-	tween.connect("finished", _on_Tween_tween_completed)
-	tween.tween_property(thruster, "position:y", initial_position_y, animation_duration)
-	tween.parallel().tween_property(thruster, "scale:y", initial_scale_y, animation_duration)
-	animation_state = ThrusterState.DISENGAGING
-
-
 func _input(_event):
 	if Input.is_action_just_pressed("ui_up"):
 		match animation_state:
@@ -77,9 +63,26 @@ func _input(_event):
 		match animation_state:
 			ThrusterState.ENGAGING:
 				tween.kill()
-				reset_thruster()
+				animate_thruster(true)
 			ThrusterState.ENGAGED:
-				reset_thruster()
+				animate_thruster(true)
+
+
+## Thruster animation is a single texture that's scaled and moved
+## to simulate the engine's increasing power. It's tweened back to
+## initial values instead of cutting off instantly.
+func animate_thruster(reset: bool = false):
+	tween = create_tween()
+	tween.set_parallel()
+	tween.connect("finished", _on_Tween_tween_completed)
+	if reset:
+		tween.tween_property(thruster, "position:y", initial_position_y, animation_duration)
+		tween.tween_property(thruster, "scale:y", initial_scale_y, animation_duration)
+		animation_state = ThrusterState.DISENGAGING
+	else:
+		tween.tween_property(thruster, "position:y", final_position_y, animation_duration)
+		tween.tween_property(thruster, "scale:y", final_scale_y, animation_duration)
+		animation_state = ThrusterState.ENGAGING
 
 
 func _on_Tween_tween_completed():
