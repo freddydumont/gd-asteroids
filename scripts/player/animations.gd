@@ -42,8 +42,8 @@ func animate_thruster(reset: bool = false):
 	tween.set_parallel()
 	tween.connect("finished", _on_Tween_tween_completed)
 	if reset:
-		tween.tween_property(thruster, "position:y", initial_position_y, animation_duration)
-		tween.tween_property(thruster, "scale:y", initial_scale_y, animation_duration)
+		tween.tween_property(thruster, "position:y", initial_position_y, animation_duration * 2 )
+		tween.tween_property(thruster, "scale:y", initial_scale_y, animation_duration * 2)
 		animation_state = ThrusterState.DISENGAGING
 	else:
 		tween.tween_property(thruster, "position:y", final_position_y, animation_duration)
