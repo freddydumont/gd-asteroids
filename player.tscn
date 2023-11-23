@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmhl4tjaesyu3"]
+[gd_scene load_steps=6 format=3 uid="uid://bmhl4tjaesyu3"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_eruna"]
+[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_qeuxp"]
 [ext_resource type="Texture2D" uid="uid://corpfq0dn5auc" path="res://assets/simpleSpace_tilesheet.png" id="1_ukqy0"]
+[ext_resource type="Script" path="res://scripts/player/animations.gd" id="3_q4njr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_702qv"]
 atlas = ExtResource("1_ukqy0")
@@ -17,11 +18,12 @@ center_of_mass = Vector2(-8, 2.08167e-16)
 gravity_scale = 2.66454e-15
 linear_damp = 1.0
 angular_damp = 2.5
-script = ExtResource("1_eruna")
+script = ExtResource("1_qeuxp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
 texture = SubResource("AtlasTexture_702qv")
+script = ExtResource("3_q4njr")
 
 [node name="Thruster" type="Sprite2D" parent="Sprite2D"]
 show_behind_parent = true
