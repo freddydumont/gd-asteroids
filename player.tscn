@@ -36,23 +36,31 @@ position = Vector2(-24, -8)
 rotation = 3.14159
 emitting = false
 amount = 80
-lifetime = 0.15
+lifetime = 0.2
+randomness = 1.0
+lifetime_randomness = 1.0
 spread = 10.0
 gravity = Vector2(2.08165e-12, 2.08165e-12)
 initial_velocity_min = 2000.0
 initial_velocity_max = 3000.0
-linear_accel_max = 70.71
+damping_min = 10000.0
+damping_max = 50000.0
+scale_amount_max = 1.5
 
 [node name="LateralThrusterRight" type="CPUParticles2D" parent="Sprite2D"]
 position = Vector2(24, -8)
 emitting = false
 amount = 80
-lifetime = 0.15
+lifetime = 0.2
+randomness = 1.0
+lifetime_randomness = 1.0
 spread = 10.0
 gravity = Vector2(2.08165e-12, 2.08165e-12)
 initial_velocity_min = 2000.0
 initial_velocity_max = 3000.0
-linear_accel_max = 70.71
+damping_min = 10000.0
+damping_max = 50000.0
+scale_amount_max = 1.5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 rotation = 1.5708
