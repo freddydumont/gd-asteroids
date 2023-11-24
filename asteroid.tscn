@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1jc6jfe4yhd4"]
+
+[ext_resource type="Texture2D" uid="uid://corpfq0dn5auc" path="res://assets/simpleSpace_tilesheet.png" id="1_knd8b"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0oiev"]
+atlas = ExtResource("1_knd8b")
+region = Rect2(16, 528, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bnmhb"]
+atlas = ExtResource("1_knd8b")
+region = Rect2(272, 528, 96, 96)
+
+[node name="Asteroid" type="Node2D"]
+
+[node name="OctogonalAsteroid" type="RigidBody2D" parent="."]
+center_of_mass_mode = 1
+center_of_mass = Vector2(2.08167e-16, 2.08167e-16)
+
+[node name="Sprite2D" type="Sprite2D" parent="OctogonalAsteroid"]
+texture = SubResource("AtlasTexture_0oiev")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OctogonalAsteroid"]
+build_mode = 1
+polygon = PackedVector2Array(0, -48, 32, -32, 48, 0, 32, 33, 0, 48, -32, 33, -48, 0, -33, -32)
+
+[node name="SquareAsteroid" type="RigidBody2D" parent="."]
+center_of_mass_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="SquareAsteroid"]
+texture = SubResource("AtlasTexture_bnmhb")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="SquareAsteroid"]
+polygon = PackedVector2Array(3, -48, 48, -16, 48, 1, 17, 48, -1, 48, -48, 17, -48, -1, -16, -48)
