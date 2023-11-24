@@ -26,6 +26,7 @@ func spawn_asteroid():
 	# Launch the asteroid
 	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
 	asteroid.linear_velocity = velocity.rotated(direction)
+	asteroid.angular_velocity = randf_range(-4, 4)
 	add_child(asteroid)
 
 

@@ -3,6 +3,9 @@
 [ext_resource type="Script" path="res://scripts/asteroids/asteroid.gd" id="1_cjjgl"]
 
 [node name="Asteroid" type="RigidBody2D"]
+mass = 10.0
 center_of_mass_mode = 1
 gravity_scale = 2.66454e-15
+linear_damp_mode = 1
+angular_damp_mode = 1
 script = ExtResource("1_cjjgl")
