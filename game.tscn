@@ -42,7 +42,7 @@ one_shot = true
 autostart = true
 
 [node name="AsteroidTimer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.2
 
 [node name="AsteroidPath" type="Path2D" parent="."]
 curve = SubResource("Curve2D_xjoeb")

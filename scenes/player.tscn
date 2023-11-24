@@ -22,6 +22,7 @@ script = ExtResource("1_qeuxp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = 1.5708
+scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_702qv")
 script = ExtResource("3_q4njr")
 
@@ -64,5 +65,6 @@ scale_amount_max = 1.5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 rotation = 1.5708
+scale = Vector2(0.5, 0.5)
 build_mode = 1
 polygon = PackedVector2Array(0, -48, -48, 32, -32, 48, -16, 32, 16, 32, 32, 48, 48, 32)
