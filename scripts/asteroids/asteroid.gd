@@ -1,2 +1,2 @@
 class_name Asteroid
-extends RigidBody2D
+extends Entity
