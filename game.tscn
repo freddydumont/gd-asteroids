@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ckxbg2ajjexda" path="res://assets/Wallpaper2d.jpg" id="1_l13w2"]
 [ext_resource type="PackedScene" uid="uid://bmhl4tjaesyu3" path="res://scenes/player.tscn" id="2_0jay4"]
-[ext_resource type="PackedScene" uid="uid://4ype3kjkjd1a" path="res://scenes/asteroids/octogon_asteroid.tscn" id="3_tawiw"]
+[ext_resource type="PackedScene" uid="uid://4ype3kjkjd1a" path="res://scenes/asteroids/octagon_asteroid.tscn" id="3_tawiw"]
 [ext_resource type="PackedScene" uid="uid://c5yghj1u822mt" path="res://scenes/asteroids/square_asteroid.tscn" id="4_4rped"]
 
 [node name="Game" type="Node2D"]
