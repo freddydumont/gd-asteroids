@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://ciau5jq4j2y88"]
+[gd_scene load_steps=5 format=3 uid="uid://ciau5jq4j2y88"]
 
-[ext_resource type="Texture2D" uid="uid://ckxbg2ajjexda" path="res://assets/Wallpaper2d.jpg" id="1_1rubd"]
-[ext_resource type="PackedScene" uid="uid://bmhl4tjaesyu3" path="res://player.tscn" id="2_we304"]
+[ext_resource type="Texture2D" uid="uid://ckxbg2ajjexda" path="res://assets/Wallpaper2d.jpg" id="1_l13w2"]
+[ext_resource type="PackedScene" uid="uid://bmhl4tjaesyu3" path="res://player.tscn" id="2_0jay4"]
+[ext_resource type="PackedScene" uid="uid://4ype3kjkjd1a" path="res://octogon_asteroid.tscn" id="3_tawiw"]
+[ext_resource type="PackedScene" uid="uid://c5yghj1u822mt" path="res://square_asteroid.tscn" id="4_4rped"]
 
 [node name="Game" type="Node2D"]
 
@@ -20,6 +22,12 @@ offset_right = 1024.0
 offset_bottom = 540.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_1rubd")
+texture = ExtResource("1_l13w2")
 
-[node name="Player" parent="." instance=ExtResource("2_we304")]
+[node name="Player" parent="." instance=ExtResource("2_0jay4")]
+
+[node name="OctogonAsteroid" parent="." instance=ExtResource("3_tawiw")]
+script = null
+
+[node name="SquareAsteroid" parent="." instance=ExtResource("4_4rped")]
+script = null
