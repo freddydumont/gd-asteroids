@@ -1,11 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://ciau5jq4j2y88"]
+[gd_scene load_steps=7 format=3 uid="uid://ciau5jq4j2y88"]
 
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_7pgts"]
 [ext_resource type="Texture2D" uid="uid://ckxbg2ajjexda" path="res://assets/Wallpaper2d.jpg" id="1_l13w2"]
 [ext_resource type="PackedScene" uid="uid://bmhl4tjaesyu3" path="res://scenes/player.tscn" id="2_0jay4"]
 [ext_resource type="PackedScene" uid="uid://4ype3kjkjd1a" path="res://scenes/asteroids/octagon_asteroid.tscn" id="3_tawiw"]
 [ext_resource type="PackedScene" uid="uid://c5yghj1u822mt" path="res://scenes/asteroids/square_asteroid.tscn" id="4_4rped"]
 
+[sub_resource type="Curve2D" id="Curve2D_xjoeb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1920, 0, 0, 0, 0, 0, 1920, 1080, 0, 0, 0, 0, 0, 1080, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
 [node name="Game" type="Node2D"]
+script = ExtResource("1_7pgts")
+asteroid_scenes = Array[PackedScene]([ExtResource("3_tawiw"), ExtResource("4_4rped")])
+metadata/_edit_group_ = true
 
 [node name="Background" type="CanvasLayer" parent="."]
 layer = -1
@@ -26,8 +36,18 @@ texture = ExtResource("1_l13w2")
 
 [node name="Player" parent="." instance=ExtResource("2_0jay4")]
 
-[node name="OctogonAsteroid" parent="." instance=ExtResource("3_tawiw")]
-script = null
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
 
-[node name="SquareAsteroid" parent="." instance=ExtResource("4_4rped")]
-script = null
+[node name="AsteroidTimer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="AsteroidPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_xjoeb")
+
+[node name="AsteroidSpawnLocation" type="PathFollow2D" parent="AsteroidPath"]
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]

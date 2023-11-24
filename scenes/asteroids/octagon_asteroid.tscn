@@ -13,5 +13,4 @@ region = Rect2(16, 528, 96, 96)
 texture = SubResource("AtlasTexture_jtlm0")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
-build_mode = 1
 polygon = PackedVector2Array(0, -48, 32, -32, 48, 0, 32, 33, 0, 48, -32, 33, -48, 0, -33, -32)
