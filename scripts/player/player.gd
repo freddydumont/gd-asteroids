@@ -18,10 +18,10 @@ func _ready():
 # https://kidscancode.org/godot_recipes/4.x/physics/asteroids_physics/index.html
 func _physics_process(_delta):
 	thrust = Vector2.ZERO
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("thrust"):
 		thrust = transform.x * thrust_force
 
-	rotation_dir = Input.get_axis("ui_left", "ui_right")
+	rotation_dir = Input.get_axis("rotate_left", "rotate_right")
 
 	constant_force = thrust
 	constant_torque = rotation_dir * rotation_force

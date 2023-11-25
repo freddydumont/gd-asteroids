@@ -18,14 +18,14 @@ var animation_state := ThrusterState.IDLE
 
 
 func _input(_event):
-	if Input.is_action_just_pressed("ui_up"):
+	if Input.is_action_just_pressed("thrust"):
 		match animation_state:
 			ThrusterState.IDLE:
 				animate_thruster()
 			ThrusterState.DISENGAGING:
 				tween.kill()
 				animate_thruster()
-	elif Input.is_action_just_released("ui_up"):
+	elif Input.is_action_just_released("thrust"):
 		match animation_state:
 			ThrusterState.ENGAGING:
 				tween.kill()
@@ -34,13 +34,13 @@ func _input(_event):
 				animate_thruster(true)
 
 	# lateral thrusters
-	if Input.is_action_just_pressed("ui_right"):
+	if Input.is_action_just_pressed("rotate_right"):
 		$LateralThrusterLeft.emitting = true
-	elif Input.is_action_just_released("ui_right"):
+	elif Input.is_action_just_released("rotate_right"):
 		$LateralThrusterLeft.emitting = false
-	if Input.is_action_just_pressed("ui_left"):
+	if Input.is_action_just_pressed("rotate_left"):
 		$LateralThrusterRight.emitting = true
-	elif Input.is_action_just_released("ui_left"):
+	elif Input.is_action_just_released("rotate_left"):
 		$LateralThrusterRight.emitting = false
 
 
