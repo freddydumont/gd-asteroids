@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxm8k4nx5j16"]
+
+[ext_resource type="Texture2D" uid="uid://brq6c5wxfhydg" path="res://assets/sheet.svg" id="1_lf8a7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rirs4"]
+atlas = ExtResource("1_lf8a7")
+region = Rect2(228, 381, 9, 54)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1rwue"]
+radius = 4.0
+height = 54.0
+
+[node name="Projectile" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_rirs4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_1rwue")
