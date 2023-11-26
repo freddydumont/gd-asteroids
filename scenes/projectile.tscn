@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqxm8k4nx5j16"]
+[gd_scene load_steps=5 format=3 uid="uid://bqxm8k4nx5j16"]
 
 [ext_resource type="Texture2D" uid="uid://brq6c5wxfhydg" path="res://assets/sheet.svg" id="1_lf8a7"]
+[ext_resource type="Script" path="res://scripts/projectile.gd" id="1_t716c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rirs4"]
 atlas = ExtResource("1_lf8a7")
@@ -11,9 +12,16 @@ radius = 4.0
 height = 54.0
 
 [node name="Projectile" type="Area2D"]
+script = ExtResource("1_t716c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(27, 0)
+rotation = 1.5708
 texture = SubResource("AtlasTexture_rirs4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(27, 0)
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1rwue")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,6 +1,8 @@
 class_name Player
 extends Entity
 
+var projectile_scene := preload("res://scenes/projectile.tscn")
+
 @export_group("Physics")
 @export var thrust_force := 1200.0
 @export var rotation_force := 1000
@@ -25,3 +27,20 @@ func _physics_process(_delta):
 
 	constant_force = thrust
 	constant_torque = rotation_dir * rotation_force
+
+
+func _input(_event):
+	# TODO: implement rate of fire
+	if Input.is_action_pressed("fire"):
+		shoot()
+
+
+func shoot():
+	var projectile: Projectile = projectile_scene.instantiate()
+
+	projectile.global_position = $Gun.global_position
+	projectile.rotation = self.rotation
+
+	get_tree().current_scene.add_child(projectile)
+
+	projectile.shoot()
