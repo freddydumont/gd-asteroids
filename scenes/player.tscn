@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmhl4tjaesyu3"]
+[gd_scene load_steps=7 format=3 uid="uid://bmhl4tjaesyu3"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_qeuxp"]
 [ext_resource type="Texture2D" uid="uid://corpfq0dn5auc" path="res://assets/simpleSpace_tilesheet.png" id="1_ukqy0"]
 [ext_resource type="Script" path="res://scripts/player/animations.gd" id="3_q4njr"]
+[ext_resource type="AudioStream" uid="uid://dlynrbegfionh" path="res://assets/sfx/zap.wav" id="4_nvxb2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_702qv"]
 atlas = ExtResource("1_ukqy0")
@@ -71,3 +72,6 @@ polygon = PackedVector2Array(0, -48, -48, 32, -32, 48, -16, 32, 16, 32, 32, 48, 
 
 [node name="Gun" type="Marker2D" parent="."]
 position = Vector2(25, 2.08165e-12)
+
+[node name="Zap" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_nvxb2")

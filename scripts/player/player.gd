@@ -44,3 +44,4 @@ func shoot():
 	get_tree().current_scene.add_child(projectile)
 
 	projectile.shoot()
+	$Zap.play()
