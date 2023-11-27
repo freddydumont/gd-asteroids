@@ -1,13 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://4ype3kjkjd1a"]
 
-[ext_resource type="PackedScene" uid="uid://b1jc6jfe4yhd4" path="res://scenes/asteroids/asteroid.tscn" id="1_0ewfm"]
-[ext_resource type="Texture2D" uid="uid://corpfq0dn5auc" path="res://assets/simpleSpace_tilesheet.png" id="2_ijx0b"]
+[ext_resource type="PackedScene" uid="uid://b1jc6jfe4yhd4" path="res://scenes/asteroids/asteroid.tscn" id="1_igp0u"]
+[ext_resource type="Texture2D" uid="uid://corpfq0dn5auc" path="res://assets/simpleSpace_tilesheet.png" id="2_d7v3r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j8gck"]
-atlas = ExtResource("2_ijx0b")
+atlas = ExtResource("2_d7v3r")
 region = Rect2(160, 544, 64, 64)
 
-[node name="Asteroid" instance=ExtResource("1_0ewfm")]
+[node name="Asteroid" instance=ExtResource("1_igp0u")]
+size = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 texture = SubResource("AtlasTexture_j8gck")
