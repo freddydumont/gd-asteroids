@@ -3,15 +3,15 @@ extends Node2D
 
 ## how many asteroids should be spawned
 @export var asteroid_spawn_count: int = 8
-## a number of different asteroid scenes
-@export var asteroid_scenes: Array[PackedScene]
+## a number of differently sized asteroid scenes
+@export var asteroid_scenes: AsteroidScenes
 
 var asteroid_current_count := 0
 
 
 # adapted from: https://docs.godotengine.org/en/stable/getting_started/first_2d_game/05.the_main_game_scene.html
 func spawn_asteroid():
-	var asteroid: Asteroid = asteroid_scenes.pick_random().instantiate()
+	var asteroid: Asteroid = asteroid_scenes.random().instantiate()
 
 	# Choose a random location on Path2D.
 	var asteroid_spawn_location: PathFollow2D = $AsteroidPath/AsteroidSpawnLocation
