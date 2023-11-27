@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ciau5jq4j2y88"]
+[gd_scene load_steps=13 format=3 uid="uid://ciau5jq4j2y88"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_7pgts"]
 [ext_resource type="Texture2D" uid="uid://ckxbg2ajjexda" path="res://assets/Wallpaper2d.jpg" id="1_l13w2"]
@@ -8,11 +8,14 @@
 [ext_resource type="PackedScene" uid="uid://c5yghj1u822mt" path="res://scenes/asteroids/square_asteroid.tscn" id="4_4rped"]
 [ext_resource type="PackedScene" uid="uid://d3nyy5rjkdei4" path="res://scenes/asteroids/square_asteroid_md.tscn" id="5_5fp4m"]
 [ext_resource type="Script" path="res://scripts/asteroids/asteroid_scenes.gd" id="6_01ess"]
+[ext_resource type="PackedScene" uid="uid://cs58v5g5epmnn" path="res://scenes/asteroids/octagon_asteroid_sm.tscn" id="7_7dm3n"]
+[ext_resource type="PackedScene" uid="uid://ciewncdwjmgek" path="res://scenes/asteroids/square_asteroid_sm.tscn" id="8_hffx3"]
 
 [sub_resource type="Resource" id="Resource_53npk"]
 script = ExtResource("6_01ess")
 large = Array[PackedScene]([ExtResource("3_tawiw"), ExtResource("4_4rped")])
 medium = Array[PackedScene]([ExtResource("2_fed4v"), ExtResource("5_5fp4m")])
+small = Array[PackedScene]([ExtResource("7_7dm3n"), ExtResource("8_hffx3")])
 
 [sub_resource type="Curve2D" id="Curve2D_xjoeb"]
 _data = {
