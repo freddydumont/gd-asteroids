@@ -12,6 +12,8 @@ var asteroid_current_count := 0
 # adapted from: https://docs.godotengine.org/en/stable/getting_started/first_2d_game/05.the_main_game_scene.html
 func spawn_asteroid():
 	var asteroid: Asteroid = asteroid_scenes.random().instantiate()
+	# connect instance signal to game
+	asteroid.destroyed.connect(_on_asteroid_destroyed, CONNECT_ONE_SHOT)
 
 	# Choose a random location on Path2D.
 	var asteroid_spawn_location: PathFollow2D = $AsteroidPath/AsteroidSpawnLocation
@@ -39,3 +41,16 @@ func _on_asteroid_timer_timeout():
 
 func _on_start_timer_timeout():
 	$AsteroidTimer.start()
+
+
+func _on_asteroid_destroyed(
+	size: Asteroid.AsteroidSize, destroyed_position: Vector2, velocity: Vector2, spin: float
+):
+	print(size as Asteroid.AsteroidSize)
+	for scene in asteroid_scenes.split(size):
+		var asteroid = scene.instantiate()
+		asteroid.position = destroyed_position
+		asteroid.linear_velocity = velocity
+		asteroid.angular_velocity = spin
+		asteroid.destroyed.connect(_on_asteroid_destroyed, CONNECT_ONE_SHOT)
+		call_deferred("add_child", asteroid)
