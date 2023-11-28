@@ -60,3 +60,20 @@ func shoot():
 
 	projectile.shoot()
 	$Zap.play()
+
+
+# TODO: implement this in entity.gd
+# impulse should determine the amount of damage received
+# or if the asteroid will be destroyed on impact
+func _integrate_forces(state: PhysicsDirectBodyState2D):
+	var contact_count: int = state.get_contact_count()
+	for i in range(contact_count):
+		var collision: Dictionary = {
+			"collider": state.get_contact_collider(i),
+			"point": state.get_contact_local_position(i),
+			"normal": state.get_contact_local_normal(i),
+			"impulse": state.get_contact_impulse(i)
+		}
+
+		if collision.impulse > Vector2.ZERO:
+			print("Collision %s:" % i, collision)
