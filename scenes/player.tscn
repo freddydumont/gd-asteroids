@@ -75,3 +75,4 @@ position = Vector2(25, 2.08165e-12)
 
 [node name="Zap" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_nvxb2")
+volume_db = -5.0

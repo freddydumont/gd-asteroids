@@ -7,6 +7,13 @@ var projectile_scene := preload("res://scenes/projectile.tscn")
 @export var thrust_force := 1200.0
 @export var rotation_force := 1000
 
+@export_group("Gun")
+## fire rate in seconds (e.g., 0.5 seconds between shots)
+@export var fire_rate: float = 0.5
+
+var time_since_last_shot: float = 0.0
+var is_on_cooldown: bool = false
+
 var thrust := Vector2.ZERO
 var rotation_dir := 0.0
 
@@ -29,10 +36,18 @@ func _physics_process(_delta):
 	constant_torque = rotation_dir * rotation_force
 
 
-func _input(_event):
-	# TODO: implement rate of fire
-	if Input.is_action_pressed("fire"):
+func _process(delta: float):
+	# If we're on cooldown, update the time since the last shot fired
+	if is_on_cooldown:
+		time_since_last_shot += delta
+		# Check if we're ready to fire again
+		if time_since_last_shot >= fire_rate:
+			is_on_cooldown = false
+			time_since_last_shot = 0.0
+
+	if Input.is_action_pressed("fire") and not is_on_cooldown:
 		shoot()
+		is_on_cooldown = true
 
 
 func shoot():
