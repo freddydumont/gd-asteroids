@@ -15,9 +15,6 @@ signal destroyed(size: AsteroidSize, position: Vector2, velocity: Vector2, rotat
 
 
 func hit(_damage: int):
-	# TODO: change sound based on asteroid size, move sound to game
-	# this sound is for big asteroids, who'll split into smaller ones
-	$Split.play()
 	# at global_position, add two asteroids of the smaller size
 	destroyed.emit(size, global_position, linear_velocity, angular_velocity)
 	queue_free()

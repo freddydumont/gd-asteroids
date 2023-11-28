@@ -46,7 +46,6 @@ func _on_start_timer_timeout():
 func _on_asteroid_destroyed(
 	size: Asteroid.AsteroidSize, destroyed_position: Vector2, velocity: Vector2, spin: float
 ):
-	print(size as Asteroid.AsteroidSize)
 	for scene in asteroid_scenes.split(size):
 		var asteroid = scene.instantiate()
 		asteroid.position = destroyed_position
