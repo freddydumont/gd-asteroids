@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqxm8k4nx5j16"]
+[gd_scene load_steps=8 format=3 uid="uid://bqxm8k4nx5j16"]
 
 [ext_resource type="Texture2D" uid="uid://brq6c5wxfhydg" path="res://assets/sheet.svg" id="1_lf8a7"]
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_t716c"]
@@ -10,6 +10,31 @@ region = Rect2(228, 381, 9, 54)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1rwue"]
 radius = 4.0
 height = 54.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_abv08"]
+atlas = ExtResource("1_lf8a7")
+region = Rect2(305, 370, 59, 74)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3bnpu"]
+atlas = ExtResource("1_lf8a7")
+region = Rect2(364, 370, 59, 74)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8mfbl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_abv08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3bnpu")
+}],
+"loop": false,
+"name": &"hit",
+"speed": 8.0
+}]
 
 [node name="Projectile" type="Area2D"]
 script = ExtResource("1_t716c")
@@ -23,5 +48,13 @@ texture = SubResource("AtlasTexture_rirs4")
 position = Vector2(27, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1rwue")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(51, 1)
+scale = Vector2(0.45, 0.45)
+sprite_frames = SubResource("SpriteFrames_8mfbl")
+animation = &"hit"
+frame_progress = 0.727586
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

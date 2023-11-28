@@ -29,5 +29,18 @@ func _on_body_entered(body: Node2D):
 		body.hit(damage)
 
 	if not (body is Player):
-		# TODO: hit sprites animation
-		self.queue_free()
+		await play_hit_animation()
+		queue_free()
+
+
+## Plays an hit animation and returns `animation_finished` signal
+func play_hit_animation() -> Signal:
+	# disable sprite, movement and collision
+	$Sprite2D.hide()
+	linear_velocity = Vector2.ZERO
+	$CollisionShape2D.set_deferred("disabled", true)
+
+	# play animation
+	$AnimatedSprite2D.show()
+	$AnimatedSprite2D.play("hit")
+	return $AnimatedSprite2D.animation_finished
