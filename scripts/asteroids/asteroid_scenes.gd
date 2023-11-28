@@ -11,7 +11,6 @@ func random():
 
 
 ## Splits asteroids into two smaller sizes
-## TODO: fix scale bug with small asteroids
 func split(size: Asteroid.AsteroidSize) -> Array[PackedScene]:
 	match size:
 		Asteroid.AsteroidSize.LARGE:

@@ -43,6 +43,7 @@ func _on_start_timer_timeout():
 	$AsteroidTimer.start()
 
 
+# TODO: add some randomness to the linear_velocity
 func _on_asteroid_destroyed(
 	size: Asteroid.AsteroidSize, destroyed_position: Vector2, velocity: Vector2, spin: float
 ):
