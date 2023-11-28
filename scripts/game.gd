@@ -43,14 +43,14 @@ func _on_start_timer_timeout():
 	$AsteroidTimer.start()
 
 
-# TODO: add some randomness to the linear_velocity
 func _on_asteroid_destroyed(
 	size: Asteroid.AsteroidSize, destroyed_position: Vector2, velocity: Vector2, spin: float
 ):
 	for scene in asteroid_scenes.split(size):
 		var asteroid = scene.instantiate()
 		asteroid.position = destroyed_position
-		asteroid.linear_velocity = velocity
-		asteroid.angular_velocity = spin
+		asteroid.rotation += randf_range(-PI, PI)
+		asteroid.linear_velocity = velocity.rotated(randf_range(-PI / 3, PI / 3)) * 1.25
+		asteroid.angular_velocity = spin + randf_range(-PI / 3, PI / 3)
 		asteroid.destroyed.connect(_on_asteroid_destroyed, CONNECT_ONE_SHOT)
 		call_deferred("add_child", asteroid)
