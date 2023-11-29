@@ -3,6 +3,10 @@ extends Entity
 
 var projectile_scene := preload("res://scenes/projectile.tscn")
 
+@export_group("Health")
+@export var lives := 4
+@export var collision_damage_threshold := 0.1
+
 @export_group("Physics")
 @export var thrust_force := 1200.0
 @export var rotation_force := 1000
@@ -21,6 +25,25 @@ var rotation_dir := 0.0
 func _ready():
 	# place the player at the center of the screen
 	position = screen_size / 2
+
+
+func _integrate_forces(state: PhysicsDirectBodyState2D):
+	# this calls Entity's same func that allows wrapping around screen
+	super(state)
+
+	if state.get_contact_count() > 0:
+		var damage := 0.0
+
+		# accumulate damage based on contact impulse magnitudes
+		for i in range(state.get_contact_count()):
+			damage += state.get_contact_impulse(i).length()
+
+		if damage > collision_damage_threshold:
+				# TODO: reduce lives by 1
+				# display in the hud
+				# invulnerabilty frames (flash alpha)
+				# if lives = 0, send signal
+				print(damage)
 
 
 # Movement and wrapping adapted from:
@@ -60,20 +83,3 @@ func shoot():
 
 	projectile.shoot()
 	$Zap.play()
-
-
-# TODO: implement this in entity.gd
-# impulse should determine the amount of damage received
-# or if the asteroid will be destroyed on impact
-func _integrate_forces(state: PhysicsDirectBodyState2D):
-	var contact_count: int = state.get_contact_count()
-	for i in range(contact_count):
-		var collision: Dictionary = {
-			"collider": state.get_contact_collider(i),
-			"point": state.get_contact_local_position(i),
-			"normal": state.get_contact_local_normal(i),
-			"impulse": state.get_contact_impulse(i)
-		}
-
-		if collision.impulse > Vector2.ZERO:
-			print("Collision %s:" % i, collision)
