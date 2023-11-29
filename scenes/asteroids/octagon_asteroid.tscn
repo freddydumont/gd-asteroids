@@ -8,6 +8,7 @@ atlas = ExtResource("2_tlpg3")
 region = Rect2(16, 528, 96, 96)
 
 [node name="Asteroid" instance=ExtResource("1_bcdaf")]
+mass = 20.0
 size = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]

@@ -8,7 +8,7 @@ atlas = ExtResource("2_lyvmy")
 region = Rect2(160, 544, 64, 64)
 
 [node name="Asteroid" instance=ExtResource("1_vmd62")]
-mass = 3.0
+mass = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 position = Vector2(2.08165e-12, 2.08165e-12)
