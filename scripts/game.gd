@@ -7,7 +7,8 @@ extends Node2D
 @export var asteroid_scenes: AsteroidScenes
 
 var asteroid_current_count := 0
-
+var score := 0
+const asteroid_points := [100, 50, 20]
 
 # adapted from: https://docs.godotengine.org/en/stable/getting_started/first_2d_game/05.the_main_game_scene.html
 func spawn_asteroid():
@@ -46,6 +47,9 @@ func _on_start_timer_timeout():
 func _on_asteroid_destroyed(
 	size: Asteroid.AsteroidSize, destroyed_position: Vector2, velocity: Vector2, spin: float
 ):
+	score += asteroid_points[size]
+	$HUD.update_score(score)
+
 	for scene in asteroid_scenes.split(size):
 		var asteroid = scene.instantiate()
 		asteroid.position = destroyed_position

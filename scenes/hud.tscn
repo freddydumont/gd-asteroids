@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://fcuq0jl3snmg"]
+
+[ext_resource type="FontFile" uid="uid://ci43iy25f1rsr" path="res://assets/kenvector_future_thin.ttf" id="1_eu7uy"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_v2l4o"]
+
+[node name="HUD" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_v2l4o")
+
+[node name="ScoreLabel" type="Label" parent="."]
+offset_right = 360.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("1_eu7uy")
+theme_override_font_sizes/font_size = 80
+text = "00"
+horizontal_alignment = 2
+vertical_alignment = 1
