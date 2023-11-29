@@ -1,6 +1,8 @@
 class_name Game
 extends Node2D
 
+## how many lives the player has
+@export var lives_left := 4
 ## how many asteroids should be spawned
 @export var asteroid_spawn_count: int = 8
 ## a number of differently sized asteroid scenes
@@ -9,6 +11,11 @@ extends Node2D
 var asteroid_current_count := 0
 var score := 0
 const asteroid_points := [100, 50, 20]
+
+
+func _ready():
+	$Player.take_damage.connect(_on_player_take_damage)
+
 
 # adapted from: https://docs.godotengine.org/en/stable/getting_started/first_2d_game/05.the_main_game_scene.html
 func spawn_asteroid():
@@ -44,12 +51,19 @@ func _on_start_timer_timeout():
 	$AsteroidTimer.start()
 
 
+func _on_player_take_damage():
+	lives_left -= 1
+	# TODO: if life reaches 0, game over
+	$HUD.set_lives(lives_left)
+
+
 func _on_asteroid_destroyed(
 	size: Asteroid.AsteroidSize, destroyed_position: Vector2, velocity: Vector2, spin: float
 ):
 	score += asteroid_points[size]
 	$HUD.update_score(score)
 
+	# TODO: add minimum velocity to child asteroids so they don't remain stationary
 	for scene in asteroid_scenes.split(size):
 		var asteroid = scene.instantiate()
 		asteroid.position = destroyed_position

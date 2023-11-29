@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://fcuq0jl3snmg"]
+[gd_scene load_steps=5 format=3 uid="uid://fcuq0jl3snmg"]
 
 [ext_resource type="FontFile" uid="uid://ci43iy25f1rsr" path="res://assets/kenvector_future_thin.ttf" id="1_eu7uy"]
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_v2l4o"]
+[ext_resource type="Texture2D" uid="uid://brq6c5wxfhydg" path="res://assets/sheet.svg" id="3_o0ta8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsovr"]
+atlas = ExtResource("3_o0ta8")
+region = Rect2(963, 354, 30, 32)
 
 [node name="HUD" type="CanvasLayer"]
 layer = 2
@@ -15,3 +20,29 @@ theme_override_font_sizes/font_size = 80
 text = "00"
 horizontal_alignment = 2
 vertical_alignment = 1
+
+[node name="LivesContainer" type="HBoxContainer" parent="."]
+offset_top = 120.0
+offset_right = 344.0
+offset_bottom = 169.0
+alignment = 2
+
+[node name="LifeTexture" type="TextureRect" parent="LivesContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_dsovr")
+expand_mode = 3
+
+[node name="LifeTexture2" type="TextureRect" parent="LivesContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_dsovr")
+expand_mode = 3
+
+[node name="LifeTexture3" type="TextureRect" parent="LivesContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_dsovr")
+expand_mode = 3
+
+[node name="LifeTexture4" type="TextureRect" parent="LivesContainer"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_dsovr")
+expand_mode = 3

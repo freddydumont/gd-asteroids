@@ -4,8 +4,9 @@ extends Entity
 var projectile_scene := preload("res://scenes/projectile.tscn")
 
 @export_group("Health")
-@export var lives := 4
 @export var collision_damage_threshold := 0.1
+## how much time in seconds the player is invulnerable after a hit
+@export var invulnerability_seconds := 2.0
 
 @export_group("Physics")
 @export var thrust_force := 1200.0
@@ -14,6 +15,11 @@ var projectile_scene := preload("res://scenes/projectile.tscn")
 @export_group("Gun")
 ## fire rate in seconds (e.g., 0.5 seconds between shots)
 @export var fire_rate: float = 0.5
+
+signal take_damage
+
+var time_since_invulnerable := 0.0
+var is_invulnerable := false
 
 var time_since_last_shot: float = 0.0
 var is_on_cooldown: bool = false
@@ -31,7 +37,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	# this calls Entity's same func that allows wrapping around screen
 	super(state)
 
-	if state.get_contact_count() > 0:
+	if not is_invulnerable and state.get_contact_count() > 0:
 		var damage := 0.0
 
 		# accumulate damage based on contact impulse magnitudes
@@ -39,11 +45,9 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 			damage += state.get_contact_impulse(i).length()
 
 		if damage > collision_damage_threshold:
-				# TODO: reduce lives by 1
-				# display in the hud
-				# invulnerabilty frames (flash alpha)
-				# if lives = 0, send signal
-				print(damage)
+			take_damage.emit()
+			is_invulnerable = true
+			print(damage)
 
 
 # Movement and wrapping adapted from:
@@ -60,6 +64,17 @@ func _physics_process(_delta):
 
 
 func _process(delta: float):
+	# play invulnerability animation and reset invulnerability
+	if is_invulnerable:
+		if not $AnimationPlayer.is_playing():
+			$AnimationPlayer.play("invulnerability")
+
+		time_since_invulnerable += delta
+		if time_since_invulnerable >= invulnerability_seconds:
+			is_invulnerable = false
+			$AnimationPlayer.stop()
+			time_since_invulnerable = 0.0
+
 	# If we're on cooldown, update the time since the last shot fired
 	if is_on_cooldown:
 		time_since_last_shot += delta
