@@ -46,3 +46,23 @@ expand_mode = 3
 layout_mode = 2
 texture = SubResource("AtlasTexture_dsovr")
 expand_mode = 3
+
+[node name="Messages" type="CenterContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -140.0
+offset_right = 960.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Messages"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_eu7uy")
+theme_override_font_sizes/font_size = 120
+text = "Game over"

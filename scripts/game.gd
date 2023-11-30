@@ -1,6 +1,8 @@
 class_name Game
 extends Node2D
 
+signal game_over
+
 ## how many lives the player has
 @export var lives_left := 4
 ## how many asteroids should be spawned
@@ -53,8 +55,15 @@ func _on_start_timer_timeout():
 
 func _on_player_take_damage():
 	lives_left -= 1
-	# TODO: if life reaches 0, game over
 	$HUD.set_lives(lives_left)
+
+	if lives_left == 0:
+		game_over.emit()
+
+
+func _on_game_over():
+	$HUD/Messages/Label.text = "Game Over"
+	$HUD/Messages/Label.show()
 
 
 func _on_asteroid_destroyed(

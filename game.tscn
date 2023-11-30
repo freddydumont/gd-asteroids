@@ -81,5 +81,7 @@ stream = ExtResource("13_gu7tw")
 volume_db = 5.0
 max_polyphony = 4
 
+[connection signal="game_over" from="." to="." method="_on_game_over"]
+[connection signal="game_over" from="." to="Player" method="_on_game_game_over"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]
