@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmhl4tjaesyu3"]
+[gd_scene load_steps=15 format=3 uid="uid://bmhl4tjaesyu3"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_qeuxp"]
 [ext_resource type="Texture2D" uid="uid://corpfq0dn5auc" path="res://assets/simpleSpace_tilesheet.png" id="1_ukqy0"]
@@ -19,6 +19,9 @@ region = Rect2(928, 640, 64, 114)
 [sub_resource type="AtlasTexture" id="AtlasTexture_ilqvk"]
 atlas = ExtResource("4_jyaaq")
 region = Rect2(158, 613, 143, 118)
+
+[sub_resource type="Gradient" id="Gradient_nqw57"]
+offsets = PackedFloat32Array(0, 0.794702)
 
 [sub_resource type="Animation" id="Animation_t3esr"]
 resource_name = "invulnerability"
@@ -123,6 +126,24 @@ polygon = PackedVector2Array(0, -48, -48, 32, -32, 48, -16, 32, 16, 32, 32, 48, 
 
 [node name="Gun" type="Marker2D" parent="."]
 position = Vector2(25, 2.08165e-12)
+
+[node name="Explosion" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 400
+one_shot = true
+explosiveness = 0.75
+randomness = 0.5
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_sphere_radius = 8.0
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+scale_amount_max = 2.0
+color = Color(1, 0.603922, 0.341176, 1)
+color_ramp = SubResource("Gradient_nqw57")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

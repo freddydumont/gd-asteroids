@@ -93,6 +93,12 @@ func shoot():
 	$Zap.play()
 
 
+## Disables controls, hides the ship and displays explosion before freeing
 func _on_game_game_over():
-	# TODO: await destroyed animation, then queue_free
-	print("player is destroyed!")
+	set_physics_process(false)
+	$Sprite2D.hide()
+
+	var explosion: CPUParticles2D = $Explosion
+	explosion.emitting = true
+	await get_tree().create_timer(explosion.lifetime).timeout
+	queue_free()
