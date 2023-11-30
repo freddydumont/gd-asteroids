@@ -16,6 +16,7 @@ const asteroid_points := [100, 50, 20]
 
 
 func _ready():
+	$HUD.set_lives(lives_left)
 	$Player.take_damage.connect(_on_player_take_damage)
 
 
