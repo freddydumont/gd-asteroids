@@ -95,6 +95,7 @@ func shoot():
 
 ## Disables controls, hides the ship and displays explosion before freeing
 func _on_game_game_over():
+	set_process(false)
 	set_physics_process(false)
 	$Sprite2D.hide()
 
