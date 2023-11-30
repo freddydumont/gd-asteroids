@@ -5,7 +5,7 @@ signal take_damage
 
 @export_group("Health")
 ## how much time in seconds the player is invulnerable after a hit
-@export var invulnerability_seconds := 2.0
+@export var invulnerability_seconds := 3.0
 
 @export_group("Physics")
 @export var thrust_force := 1200.0
@@ -59,11 +59,13 @@ func _process(delta: float):
 	if is_invulnerable:
 		if not $AnimationPlayer.is_playing():
 			$AnimationPlayer.play("invulnerability")
+			$ShieldUp.play()
 
 		time_since_invulnerable += delta
 		if time_since_invulnerable >= invulnerability_seconds:
 			is_invulnerable = false
 			$AnimationPlayer.stop()
+			$ShieldDown.play()
 			time_since_invulnerable = 0.0
 
 	# If we're on cooldown, update the time since the last shot fired
