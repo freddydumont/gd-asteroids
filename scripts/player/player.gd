@@ -1,10 +1,9 @@
 class_name Player
 extends Entity
 
-var projectile_scene := preload("res://scenes/projectile.tscn")
+signal take_damage
 
 @export_group("Health")
-@export var collision_damage_threshold := 0.1
 ## how much time in seconds the player is invulnerable after a hit
 @export var invulnerability_seconds := 2.0
 
@@ -16,7 +15,7 @@ var projectile_scene := preload("res://scenes/projectile.tscn")
 ## fire rate in seconds (e.g., 0.5 seconds between shots)
 @export var fire_rate: float = 0.5
 
-signal take_damage
+var projectile_scene := preload("res://scenes/projectile.tscn")
 
 var time_since_invulnerable := 0.0
 var is_invulnerable := false
@@ -38,16 +37,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	super(state)
 
 	if not is_invulnerable and state.get_contact_count() > 0:
-		var damage := 0.0
-
-		# accumulate damage based on contact impulse magnitudes
-		for i in range(state.get_contact_count()):
-			damage += state.get_contact_impulse(i).length()
-
-		if damage > collision_damage_threshold:
-			take_damage.emit()
-			is_invulnerable = true
-			print(damage)
+		take_damage.emit()
+		is_invulnerable = true
 
 
 # Movement and wrapping adapted from:
