@@ -103,7 +103,7 @@ func _on_game_game_over():
 	set_physics_process(false)
 	$Sprite2D.hide()
 
-	# TODO: add player explosion sound
+	$ShipDestroyed.play()
 	var explosion: CPUParticles2D = $Explosion
 	explosion.emitting = true
 	await get_tree().create_timer(explosion.lifetime).timeout

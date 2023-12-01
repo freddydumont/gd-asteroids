@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bmhl4tjaesyu3"]
+[gd_scene load_steps=16 format=3 uid="uid://bmhl4tjaesyu3"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_qeuxp"]
 [ext_resource type="Texture2D" uid="uid://corpfq0dn5auc" path="res://assets/simpleSpace_tilesheet.png" id="1_ukqy0"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dlynrbegfionh" path="res://assets/sfx/zap.wav" id="4_nvxb2"]
 [ext_resource type="AudioStream" uid="uid://b5uc72wdtdc78" path="res://assets/sfx/sfx_shieldDown.ogg" id="5_h6y38"]
 [ext_resource type="AudioStream" uid="uid://2k83ywhlxlry" path="res://assets/sfx/sfx_shieldUp.ogg" id="6_glpia"]
+[ext_resource type="AudioStream" uid="uid://c42eu5scnr33e" path="res://assets/sfx/ship_destroyed.wav" id="8_bujax"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_702qv"]
 atlas = ExtResource("1_ukqy0")
@@ -160,3 +161,6 @@ stream = ExtResource("5_h6y38")
 
 [node name="ShieldUp" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_glpia")
+
+[node name="ShipDestroyed" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_bujax")
