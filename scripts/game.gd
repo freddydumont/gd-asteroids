@@ -77,12 +77,7 @@ func _on_game_over():
 	$HUD/Messages/Label.show()
 	await get_tree().create_timer(3).timeout
 
-	$HUD/Messages/Label.text = "Resetting in 3..."
-	await get_tree().create_timer(1).timeout
-	$HUD/Messages/Label.text = "Resetting in 2..."
-	await get_tree().create_timer(1).timeout
-	$HUD/Messages/Label.text = "Resetting in 1..."
-	await get_tree().create_timer(1).timeout
+	await (await message_timer("Resetting")).timeout
 	get_tree().reload_current_scene()
 
 
@@ -117,12 +112,18 @@ func _on_level_completed():
 	$HUD/Messages/Label.show()
 	await get_tree().create_timer(3).timeout
 
-	$HUD/Messages/Label.text = "Next level in 3..."
-	await get_tree().create_timer(1).timeout
-	$HUD/Messages/Label.text = "Next level in 2..."
-	await get_tree().create_timer(1).timeout
-	$HUD/Messages/Label.text = "Next level in 1..."
-	$StartTimer.wait_time = 1
+	await (await message_timer("Next level")).timeout
+	$StartTimer.wait_time = 0.1
 
 	level += 1
 	$StartTimer.start()
+
+
+## Displays a 3 sec countdown message and returns a signal to await for
+func message_timer(message: String) -> SceneTreeTimer:
+	$HUD/Messages/Label.text = "%s in 3..." % message
+	await get_tree().create_timer(1).timeout
+	$HUD/Messages/Label.text = "%s in 2..." % message
+	await get_tree().create_timer(1).timeout
+	$HUD/Messages/Label.text = "%s in 1..." % message
+	return get_tree().create_timer(1)
