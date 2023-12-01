@@ -9,4 +9,3 @@ func update_score(score):
 func set_lives(lives_left: int):
 	while $LivesContainer.get_child_count() > lives_left:
 		$LivesContainer.get_child(0).free()
-		

@@ -3,6 +3,8 @@ extends Node2D
 
 signal game_over
 
+const ASTEROID_POINTS := [100, 50, 20]
+
 ## how many lives the player has
 @export var lives_left := 4
 ## how many asteroids should be spawned
@@ -12,7 +14,6 @@ signal game_over
 
 var asteroid_current_count := 0
 var score := 0
-const asteroid_points := [100, 50, 20]
 
 
 # TODO: add levels
@@ -83,7 +84,7 @@ func _on_game_over():
 func _on_asteroid_destroyed(
 	size: Asteroid.AsteroidSize, destroyed_position: Vector2, velocity: Vector2, spin: float
 ):
-	score += asteroid_points[size]
+	score += ASTEROID_POINTS[size]
 	$HUD.update_score(score)
 
 	# TODO: add minimum velocity to child asteroids so they don't remain stationary
