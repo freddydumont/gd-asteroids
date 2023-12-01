@@ -64,9 +64,19 @@ func _on_player_take_damage():
 		game_over.emit()
 
 
+## Displays Game Over message for 3 secs, then start countdown to reset
 func _on_game_over():
 	$HUD/Messages/Label.text = "Game Over"
 	$HUD/Messages/Label.show()
+	await get_tree().create_timer(3).timeout
+
+	$HUD/Messages/Label.text = "Resetting in 3..."
+	await get_tree().create_timer(1).timeout
+	$HUD/Messages/Label.text = "Resetting in 2..."
+	await get_tree().create_timer(1).timeout
+	$HUD/Messages/Label.text = "Resetting in 1..."
+	await get_tree().create_timer(1).timeout
+	get_tree().reload_current_scene()
 
 
 ## Updates score and replace destroyed asteroid with two of smaller size
