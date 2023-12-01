@@ -14,3 +14,20 @@ angular_damp_mode = 1
 script = ExtResource("1_cjjgl")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="Explosion" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 400
+lifetime = 0.7
+explosiveness = 0.9
+randomness = 0.5
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_sphere_radius = 4.0
+spread = 180.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 150.0
+initial_velocity_max = 300.0
+scale_amount_max = 3.0
+color = Color(0.85098, 0.85098, 0.85098, 1)
+color_ramp = SubResource("Gradient_hdtf0")

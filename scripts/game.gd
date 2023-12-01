@@ -67,6 +67,7 @@ func _on_game_over():
 	$HUD/Messages/Label.show()
 
 
+## Updates score and replace destroyed asteroid with two of smaller size
 func _on_asteroid_destroyed(
 	size: Asteroid.AsteroidSize, destroyed_position: Vector2, velocity: Vector2, spin: float
 ):
