@@ -1,7 +1,6 @@
 class_name Projectile
 extends Area2D
 
-@export var damage: int = 2
 @export var speed: float = 1000
 @export var lifetime: float = 1
 
@@ -36,7 +35,7 @@ func shoot():
 ## triggers the hit() method when a collision is detected
 func _on_body_entered(body: Node2D):
 	if body.has_method("hit"):
-		body.hit(damage)
+		body.hit()
 
 	if not (body is Player):
 		await play_hit_animation()
