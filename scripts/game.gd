@@ -15,6 +15,8 @@ var score := 0
 const asteroid_points := [100, 50, 20]
 
 
+# TODO: add levels
+# TODO: add UFO
 func _ready():
 	$HUD.set_lives(lives_left)
 	$Player.take_damage.connect(_on_player_take_damage)
