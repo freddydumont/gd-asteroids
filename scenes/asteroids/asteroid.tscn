@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1jc6jfe4yhd4"]
+[gd_scene load_steps=3 format=3 uid="uid://b1jc6jfe4yhd4"]
 
 [ext_resource type="Script" path="res://scripts/asteroids/asteroid.gd" id="1_cjjgl"]
+
+[sub_resource type="Gradient" id="Gradient_hdtf0"]
+offsets = PackedFloat32Array(0, 0.794702)
 
 [node name="Asteroid" type="RigidBody2D"]
 mass = 10.0
@@ -9,3 +12,5 @@ gravity_scale = 2.66454e-15
 linear_damp_mode = 1
 angular_damp_mode = 1
 script = ExtResource("1_cjjgl")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

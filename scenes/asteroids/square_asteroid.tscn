@@ -14,5 +14,5 @@ size = 2
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 texture = SubResource("AtlasTexture_hg4e6")
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="." index="1"]
+[node name="CollisionPolygon2D" parent="." index="1"]
 polygon = PackedVector2Array(3, -48, 48, -16, 48, 1, 17, 48, -1, 48, -48, 17, -48, -1, -16, -48)

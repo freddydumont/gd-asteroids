@@ -8,14 +8,12 @@ atlas = ExtResource("2_lyvmy")
 region = Rect2(160, 544, 64, 64)
 
 [node name="Asteroid" instance=ExtResource("1_vmd62")]
-mass = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="0"]
 position = Vector2(2.08165e-12, 2.08165e-12)
 scale = Vector2(0.5, 0.5)
 texture = SubResource("AtlasTexture_j8gck")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
-position = Vector2(-4.76837e-07, 4.76837e-07)
-scale = Vector2(0.390566, 0.390566)
+[node name="CollisionPolygon2D" parent="." index="1"]
+scale = Vector2(0.391, 0.391)
 polygon = PackedVector2Array(1.22089e-06, -40.9662, 30.7247, -30.7247, 40.9662, -1.22089e-06, 30.7247, 30.7247, 1.22089e-06, 40.9662, -30.7247, 30.7247, -40.9662, -1.22089e-06, -30.7247, -30.7247)
