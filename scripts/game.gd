@@ -2,21 +2,24 @@ class_name Game
 extends Node2D
 
 signal game_over
+signal level_completed
 
 const ASTEROID_POINTS := [100, 50, 20]
 
 ## how many lives the player has
 @export var lives_left := 4
 ## how many asteroids should be spawned
-@export var asteroid_spawn_count: int = 8
+@export var asteroid_spawn_count: int = 4
+## how many more asteroids per level
+@export var asteroid_level_increment: int = 4
 ## a number of differently sized asteroid scenes
 @export var asteroid_scenes: AsteroidScenes
 
 var asteroid_current_count := 0
 var score := 0
+var level := 1
 
 
-# TODO: add levels
 # TODO: add UFO
 func _ready():
 	$HUD.set_lives(lives_left)
@@ -51,9 +54,12 @@ func _on_asteroid_timer_timeout():
 	if asteroid_current_count < asteroid_spawn_count:
 		spawn_asteroid()
 		asteroid_current_count += 1
+	else:
+		$AsteroidTimer.stop()
 
 
 func _on_start_timer_timeout():
+	$HUD/Messages/Label.hide()
 	$AsteroidTimer.start()
 
 
@@ -95,4 +101,28 @@ func _on_asteroid_destroyed(
 		asteroid.linear_velocity = velocity.rotated(randf_range(-PI / 3, PI / 3)) * 1.25
 		asteroid.angular_velocity = spin + randf_range(-PI / 3, PI / 3)
 		asteroid.destroyed.connect(_on_asteroid_destroyed, CONNECT_ONE_SHOT)
+		asteroid_current_count += 1
 		call_deferred("add_child", asteroid)
+
+	asteroid_current_count -= 1
+
+	if asteroid_current_count == 0:
+		level_completed.emit()
+
+
+func _on_level_completed():
+	asteroid_spawn_count += asteroid_level_increment
+
+	$HUD/Messages/Label.text = "Level %s complete!" % level
+	$HUD/Messages/Label.show()
+	await get_tree().create_timer(3).timeout
+
+	$HUD/Messages/Label.text = "Next level in 3..."
+	await get_tree().create_timer(1).timeout
+	$HUD/Messages/Label.text = "Next level in 2..."
+	await get_tree().create_timer(1).timeout
+	$HUD/Messages/Label.text = "Next level in 1..."
+	$StartTimer.wait_time = 1
+
+	level += 1
+	$StartTimer.start()

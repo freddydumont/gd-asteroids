@@ -7,7 +7,7 @@ extends Resource
 
 
 func random():
-	return (large if randi() % 2 else medium).pick_random()
+	return large.pick_random()
 
 
 ## Splits asteroids into two smaller sizes
