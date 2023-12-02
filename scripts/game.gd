@@ -2,20 +2,10 @@ class_name Game
 extends Node2D
 
 signal game_over
-signal level_completed
-
-const ASTEROID_POINTS := [100, 50, 20]
 
 ## how many lives the player has
 @export var lives_left := 4
-## how many asteroids should be spawned
-@export var asteroid_spawn_count: int = 4
-## how many more asteroids per level
-@export var asteroid_level_increment: int = 4
-## a number of differently sized asteroid scenes
-@export var asteroid_scenes: AsteroidScenes
 
-var asteroid_current_count := 0
 var score := 0
 var level := 1
 
@@ -24,43 +14,12 @@ var level := 1
 func _ready():
 	$HUD.set_lives(lives_left)
 	$Player.take_damage.connect(_on_player_take_damage)
-
-
-# adapted from: https://docs.godotengine.org/en/stable/getting_started/first_2d_game/05.the_main_game_scene.html
-func spawn_asteroid():
-	var asteroid: Asteroid = asteroid_scenes.random().instantiate()
-	# connect instance signal to game
-	asteroid.destroyed.connect(_on_asteroid_destroyed, CONNECT_ONE_SHOT)
-
-	# Choose a random location on Path2D.
-	var asteroid_spawn_location: PathFollow2D = $AsteroidPath/AsteroidSpawnLocation
-	asteroid_spawn_location.progress_ratio = randf()
-
-	# Set the asteroid's direction perpendicular to the path direction, with some randomness
-	var direction = asteroid_spawn_location.rotation + PI / 2 + randf_range(-PI / 4, PI / 4)
-
-	asteroid.position = asteroid_spawn_location.position
-	asteroid.rotation = direction
-
-	# Launch the asteroid
-	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
-	asteroid.linear_velocity = velocity.rotated(direction)
-	asteroid.angular_velocity = randf_range(-4, 4)
-	add_child(asteroid)
-
-
-## Delays the asteroid spawns
-func _on_asteroid_timer_timeout():
-	if asteroid_current_count < asteroid_spawn_count:
-		spawn_asteroid()
-		asteroid_current_count += 1
-	else:
-		$AsteroidTimer.stop()
+	$AsteroidSpawner.level_completed.connect(_on_asteroid_spawner_level_completed)
+	$AsteroidSpawner.score_updated.connect(_on_asteroid_spawner_score_updated)
 
 
 func _on_start_timer_timeout():
 	$HUD/Messages/Label.hide()
-	$AsteroidTimer.start()
 
 
 func _on_player_take_damage():
@@ -81,33 +40,12 @@ func _on_game_over():
 	get_tree().reload_current_scene()
 
 
-## Updates score and replace destroyed asteroid with two of smaller size
-func _on_asteroid_destroyed(
-	size: Asteroid.AsteroidSize, destroyed_position: Vector2, velocity: Vector2, spin: float
-):
-	score += ASTEROID_POINTS[size]
+func _on_asteroid_spawner_score_updated(points: int):
+	score += points
 	$HUD.update_score(score)
 
-	# TODO: add minimum velocity to child asteroids so they don't remain stationary
-	for scene in asteroid_scenes.split(size):
-		var asteroid = scene.instantiate()
-		asteroid.position = destroyed_position
-		asteroid.rotation += randf_range(-PI, PI)
-		asteroid.linear_velocity = velocity.rotated(randf_range(-PI / 3, PI / 3)) * 1.25
-		asteroid.angular_velocity = spin + randf_range(-PI / 3, PI / 3)
-		asteroid.destroyed.connect(_on_asteroid_destroyed, CONNECT_ONE_SHOT)
-		asteroid_current_count += 1
-		call_deferred("add_child", asteroid)
 
-	asteroid_current_count -= 1
-
-	if asteroid_current_count == 0:
-		level_completed.emit()
-
-
-func _on_level_completed():
-	asteroid_spawn_count += asteroid_level_increment
-
+func _on_asteroid_spawner_level_completed():
 	$HUD/Messages/Label.text = "Level %s complete!" % level
 	$HUD/Messages/Label.show()
 	await get_tree().create_timer(3).timeout

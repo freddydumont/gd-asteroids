@@ -1,0 +1,55 @@
+[gd_scene load_steps=14 format=3 uid="uid://bxfwbsq7x82e8"]
+
+[ext_resource type="Script" path="res://scripts/asteroids/asteroid_spawner.gd" id="1_mdhxr"]
+[ext_resource type="PackedScene" uid="uid://dn0l4f0mhtit4" path="res://scenes/asteroids/octagon_asteroid.tscn" id="2_68hbh"]
+[ext_resource type="AudioStream" uid="uid://bt6nt5n2vgxty" path="res://assets/sfx/explosion_large.wav" id="2_p25h5"]
+[ext_resource type="PackedScene" uid="uid://c5yghj1u822mt" path="res://scenes/asteroids/square_asteroid.tscn" id="3_oexwv"]
+[ext_resource type="AudioStream" uid="uid://ba8dj1fyli22j" path="res://assets/sfx/explosion_medium.wav" id="3_rb4dh"]
+[ext_resource type="PackedScene" uid="uid://4ype3kjkjd1a" path="res://scenes/asteroids/octagon_asteroid_md.tscn" id="4_4ec77"]
+[ext_resource type="AudioStream" uid="uid://dbimod04ynec" path="res://assets/sfx/explosion_small.wav" id="4_txjgx"]
+[ext_resource type="PackedScene" uid="uid://d3nyy5rjkdei4" path="res://scenes/asteroids/square_asteroid_md.tscn" id="5_be3ka"]
+[ext_resource type="Script" path="res://scripts/asteroids/asteroid_scenes.gd" id="6_3w85m"]
+[ext_resource type="PackedScene" uid="uid://cs58v5g5epmnn" path="res://scenes/asteroids/octagon_asteroid_sm.tscn" id="7_ro8x5"]
+[ext_resource type="PackedScene" uid="uid://ciewncdwjmgek" path="res://scenes/asteroids/square_asteroid_sm.tscn" id="8_cwr4s"]
+
+[sub_resource type="Resource" id="Resource_53npk"]
+resource_local_to_scene = true
+script = ExtResource("6_3w85m")
+large = Array[PackedScene]([ExtResource("2_68hbh"), ExtResource("3_oexwv")])
+medium = Array[PackedScene]([ExtResource("4_4ec77"), ExtResource("5_be3ka")])
+small = Array[PackedScene]([ExtResource("7_ro8x5"), ExtResource("8_cwr4s")])
+
+[sub_resource type="Curve2D" id="Curve2D_xjoeb"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1920, 0, 0, 0, 0, 0, 1920, 1080, 0, 0, 0, 0, 0, 1080, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="AsteroidSpawner" type="Node2D"]
+script = ExtResource("1_mdhxr")
+asteroid_scenes = SubResource("Resource_53npk")
+
+[node name="AsteroidPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_xjoeb")
+
+[node name="AsteroidSpawnLocation" type="PathFollow2D" parent="AsteroidPath"]
+
+[node name="AsteroidTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="AsteroidExplosionLarge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_p25h5")
+max_polyphony = 4
+
+[node name="AsteroidExplosionMedium" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rb4dh")
+volume_db = -5.0
+max_polyphony = 4
+
+[node name="AsteroidExplosionSmall" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_txjgx")
+volume_db = 5.0
+max_polyphony = 4
+
+[connection signal="level_completed" from="." to="." method="_on_level_completed"]
+[connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]

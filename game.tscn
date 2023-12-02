@@ -1,36 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://ciau5jq4j2y88"]
+[gd_scene load_steps=6 format=3 uid="uid://ciau5jq4j2y88"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_7pgts"]
 [ext_resource type="Texture2D" uid="uid://ckxbg2ajjexda" path="res://assets/Wallpaper2d.jpg" id="1_l13w2"]
 [ext_resource type="PackedScene" uid="uid://bmhl4tjaesyu3" path="res://scenes/player.tscn" id="2_0jay4"]
-[ext_resource type="PackedScene" uid="uid://4ype3kjkjd1a" path="res://scenes/asteroids/octagon_asteroid_md.tscn" id="2_fed4v"]
-[ext_resource type="PackedScene" uid="uid://dn0l4f0mhtit4" path="res://scenes/asteroids/octagon_asteroid.tscn" id="3_tawiw"]
-[ext_resource type="PackedScene" uid="uid://c5yghj1u822mt" path="res://scenes/asteroids/square_asteroid.tscn" id="4_4rped"]
-[ext_resource type="PackedScene" uid="uid://d3nyy5rjkdei4" path="res://scenes/asteroids/square_asteroid_md.tscn" id="5_5fp4m"]
-[ext_resource type="Script" path="res://scripts/asteroids/asteroid_scenes.gd" id="6_01ess"]
-[ext_resource type="PackedScene" uid="uid://cs58v5g5epmnn" path="res://scenes/asteroids/octagon_asteroid_sm.tscn" id="7_7dm3n"]
-[ext_resource type="PackedScene" uid="uid://ciewncdwjmgek" path="res://scenes/asteroids/square_asteroid_sm.tscn" id="8_hffx3"]
+[ext_resource type="PackedScene" uid="uid://bxfwbsq7x82e8" path="res://asteroid_spawner.tscn" id="5_kxdgd"]
 [ext_resource type="PackedScene" uid="uid://fcuq0jl3snmg" path="res://scenes/hud.tscn" id="10_08jji"]
-[ext_resource type="AudioStream" uid="uid://bt6nt5n2vgxty" path="res://assets/sfx/explosion_large.wav" id="11_3mo8a"]
-[ext_resource type="AudioStream" uid="uid://ba8dj1fyli22j" path="res://assets/sfx/explosion_medium.wav" id="12_76ir0"]
-[ext_resource type="AudioStream" uid="uid://dbimod04ynec" path="res://assets/sfx/explosion_small.wav" id="13_gu7tw"]
-
-[sub_resource type="Resource" id="Resource_53npk"]
-resource_local_to_scene = true
-script = ExtResource("6_01ess")
-large = Array[PackedScene]([ExtResource("3_tawiw"), ExtResource("4_4rped")])
-medium = Array[PackedScene]([ExtResource("2_fed4v"), ExtResource("5_5fp4m")])
-small = Array[PackedScene]([ExtResource("7_7dm3n"), ExtResource("8_hffx3")])
-
-[sub_resource type="Curve2D" id="Curve2D_xjoeb"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1920, 0, 0, 0, 0, 0, 1920, 1080, 0, 0, 0, 0, 0, 1080, 0, 0, 0, 0, 0, 0)
-}
-point_count = 5
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_7pgts")
-asteroid_scenes = SubResource("Resource_53npk")
 metadata/_edit_group_ = true
 
 [node name="Background" type="CanvasLayer" parent="."]
@@ -59,30 +36,9 @@ wait_time = 0.5
 one_shot = true
 autostart = true
 
-[node name="AsteroidTimer" type="Timer" parent="."]
-wait_time = 0.2
-
-[node name="AsteroidPath" type="Path2D" parent="."]
-curve = SubResource("Curve2D_xjoeb")
-
-[node name="AsteroidSpawnLocation" type="PathFollow2D" parent="AsteroidPath"]
-
-[node name="AsteroidExplosionLarge" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_3mo8a")
-max_polyphony = 4
-
-[node name="AsteroidExplosionMedium" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("12_76ir0")
-volume_db = -5.0
-max_polyphony = 4
-
-[node name="AsteroidExplosionSmall" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("13_gu7tw")
-volume_db = 5.0
-max_polyphony = 4
+[node name="AsteroidSpawner" parent="." instance=ExtResource("5_kxdgd")]
 
 [connection signal="game_over" from="." to="." method="_on_game_over"]
 [connection signal="game_over" from="." to="Player" method="_on_game_game_over"]
-[connection signal="level_completed" from="." to="." method="_on_level_completed"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
-[connection signal="timeout" from="AsteroidTimer" to="." method="_on_asteroid_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="AsteroidSpawner" method="_on_game_start_timer_timeout"]
