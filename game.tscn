@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://ciau5jq4j2y88"]
+[gd_scene load_steps=15 format=3 uid="uid://ciau5jq4j2y88"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_7pgts"]
 [ext_resource type="Texture2D" uid="uid://ckxbg2ajjexda" path="res://assets/Wallpaper2d.jpg" id="1_l13w2"]
@@ -12,8 +12,9 @@
 [ext_resource type="Script" path="res://scripts/asteroids/asteroid_scenes.gd" id="10_m4f2i"]
 [ext_resource type="PackedScene" uid="uid://cs58v5g5epmnn" path="res://scenes/asteroids/octagon_asteroid_sm.tscn" id="11_t1yit"]
 [ext_resource type="PackedScene" uid="uid://ciewncdwjmgek" path="res://scenes/asteroids/square_asteroid_sm.tscn" id="12_5jpqi"]
+[ext_resource type="PackedScene" uid="uid://esgi7wd5tch0" path="res://scenes/ufo_spawner.tscn" id="13_vq8wd"]
 
-[sub_resource type="Resource" id="Resource_16wqg"]
+[sub_resource type="Resource" id="Resource_4wh8j"]
 resource_local_to_scene = true
 script = ExtResource("10_m4f2i")
 large = Array[PackedScene]([ExtResource("6_nra6b"), ExtResource("7_ocolt")])
@@ -51,9 +52,12 @@ one_shot = true
 autostart = true
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("5_kxdgd")]
-asteroid_scenes = SubResource("Resource_16wqg")
+asteroid_scenes = SubResource("Resource_4wh8j")
+
+[node name="UFOSpawner" parent="." instance=ExtResource("13_vq8wd")]
 
 [connection signal="game_over" from="." to="." method="_on_game_over"]
 [connection signal="game_over" from="." to="Player" method="_on_game_game_over"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="AsteroidSpawner" method="_on_game_start_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="UFOSpawner" method="_on_game_start_timer_timeout"]

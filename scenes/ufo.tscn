@@ -12,6 +12,7 @@ region = Rect2(549, 215, 91, 92)
 radius = 46.0109
 
 [node name="UFO" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
 motion_mode = 1
 script = ExtResource("1_7qoe1")
 

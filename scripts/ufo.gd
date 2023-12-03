@@ -15,7 +15,7 @@ var time_since_last_change: float = 0.0
 @onready var screen_size := get_viewport_rect().size
 
 
-func _init() -> void:
+func _ready() -> void:
 	spawn_ufo()
 
 
@@ -24,10 +24,10 @@ func _process(delta: float) -> void:
 	time_since_last_change += delta
 	if time_since_last_change >= change_time:
 		time_since_last_change = 0.0
+		# TODO: correct movement so it doesn't turn around
 		velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * speed
 
-	# Move the UFO
-	move_and_slide()
+	move_and_collide(velocity * delta)
 
 
 func spawn_ufo() -> void:
