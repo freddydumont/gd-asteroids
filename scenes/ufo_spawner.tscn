@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://esgi7wd5tch0"]
 
-[ext_resource type="Script" path="res://scripts/ufo_spawner.gd" id="1_ip7av"]
+[ext_resource type="Script" path="res://scripts/ufo/ufo_spawner.gd" id="1_3r86i"]
 
 [node name="UFOSpawner" type="Node2D"]
-script = ExtResource("1_ip7av")
+script = ExtResource("1_3r86i")
 
 [node name="UFOTimer" type="Timer" parent="."]
 one_shot = true

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_7pgts"]
 [ext_resource type="Texture2D" uid="uid://ckxbg2ajjexda" path="res://assets/Wallpaper2d.jpg" id="1_l13w2"]
 [ext_resource type="PackedScene" uid="uid://bmhl4tjaesyu3" path="res://scenes/player.tscn" id="2_0jay4"]
-[ext_resource type="PackedScene" uid="uid://bxfwbsq7x82e8" path="res://asteroid_spawner.tscn" id="5_kxdgd"]
+[ext_resource type="PackedScene" uid="uid://bxfwbsq7x82e8" path="res://scenes/asteroids/asteroid_spawner.tscn" id="5_kxdgd"]
 [ext_resource type="PackedScene" uid="uid://dn0l4f0mhtit4" path="res://scenes/asteroids/octagon_asteroid.tscn" id="6_nra6b"]
 [ext_resource type="PackedScene" uid="uid://c5yghj1u822mt" path="res://scenes/asteroids/square_asteroid.tscn" id="7_ocolt"]
 [ext_resource type="PackedScene" uid="uid://4ype3kjkjd1a" path="res://scenes/asteroids/octagon_asteroid_md.tscn" id="8_bh4sm"]
@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://ciewncdwjmgek" path="res://scenes/asteroids/square_asteroid_sm.tscn" id="12_5jpqi"]
 [ext_resource type="PackedScene" uid="uid://esgi7wd5tch0" path="res://scenes/ufo_spawner.tscn" id="13_vq8wd"]
 
-[sub_resource type="Resource" id="Resource_4wh8j"]
+[sub_resource type="Resource" id="Resource_ohj3c"]
 resource_local_to_scene = true
 script = ExtResource("10_m4f2i")
 large = Array[PackedScene]([ExtResource("6_nra6b"), ExtResource("7_ocolt")])
@@ -52,7 +52,7 @@ one_shot = true
 autostart = true
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("5_kxdgd")]
-asteroid_scenes = SubResource("Resource_4wh8j")
+asteroid_scenes = SubResource("Resource_ohj3c")
 
 [node name="UFOSpawner" parent="." instance=ExtResource("13_vq8wd")]
 

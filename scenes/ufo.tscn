@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://0optjmpfejq2"]
 
-[ext_resource type="Script" path="res://scripts/ufo.gd" id="1_7qoe1"]
+[ext_resource type="Script" path="res://scripts/ufo/ufo.gd" id="1_7qoe1"]
 [ext_resource type="Texture2D" uid="uid://brq6c5wxfhydg" path="res://assets/sheet.svg" id="1_g105m"]
 [ext_resource type="Script" path="res://scripts/wrappable_object.gd" id="3_1ryms"]
 
