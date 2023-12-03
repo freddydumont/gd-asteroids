@@ -18,10 +18,11 @@ const EXPLOSION_SIZES: Array[float] = [8, 16, 24]
 
 ## Emits destroyed signal, disables asteroid and displays explosion
 func hit():
-	destroyed.emit(size, global_position, linear_velocity, angular_velocity)
-
-	collision_layer = 2
+	collision_layer = 0
+	collision_mask = 0
 	$Sprite2D.hide()
+
+	destroyed.emit(size, global_position, linear_velocity, angular_velocity)
 
 	var explosion: CPUParticles2D = $Explosion
 	explosion.emission_sphere_radius = EXPLOSION_SIZES[size]

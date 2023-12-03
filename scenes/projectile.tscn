@@ -37,6 +37,7 @@ animations = [{
 }]
 
 [node name="Projectile" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_t716c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

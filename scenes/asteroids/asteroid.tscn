@@ -6,6 +6,7 @@
 offsets = PackedFloat32Array(0, 0.794702)
 
 [node name="Asteroid" type="RigidBody2D"]
+collision_layer = 2
 mass = 10.0
 center_of_mass_mode = 1
 gravity_scale = 2.66454e-15

@@ -45,9 +45,10 @@ func _on_body_entered(body: Node2D):
 ## Plays an hit animation and returns `animation_finished` signal
 func play_hit_animation() -> Signal:
 	# disable sprite, movement and collision
+	collision_layer = 0
+	collision_mask = 0
 	$Sprite2D.hide()
 	linear_velocity = Vector2.ZERO
-	$CollisionShape2D.set_deferred("disabled", true)
 
 	# play animation
 	$AnimatedSprite2D.show()

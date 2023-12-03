@@ -39,7 +39,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 	if (
 		not is_invulnerable
 		and state.get_contact_count() > 0
-		and state.get_contact_collider_object(0).collision_layer == self.collision_layer
+		and state.get_contact_collider_object(0).collision_layer == self.collision_mask
 	):
 		take_damage.emit()
 		is_invulnerable = true

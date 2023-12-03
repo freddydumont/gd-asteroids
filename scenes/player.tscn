@@ -62,6 +62,7 @@ _data = {
 }
 
 [node name="Player" type="RigidBody2D"]
+collision_mask = 2
 center_of_mass_mode = 1
 center_of_mass = Vector2(-8, 2.08167e-16)
 gravity_scale = 2.66454e-15
