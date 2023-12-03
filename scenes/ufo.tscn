@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://0optjmpfejq2"]
+
+[ext_resource type="Script" path="res://scripts/ufo.gd" id="1_7qoe1"]
+[ext_resource type="Texture2D" uid="uid://brq6c5wxfhydg" path="res://assets/sheet.svg" id="1_g105m"]
+[ext_resource type="Script" path="res://scripts/wrappable_object.gd" id="3_1ryms"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qf8c"]
+atlas = ExtResource("1_g105m")
+region = Rect2(549, 215, 91, 92)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1gjpv"]
+radius = 46.0109
+
+[node name="UFO" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_7qoe1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_8qf8c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1gjpv")
+
+[node name="WrappableObject2D" type="Node2D" parent="."]
+script = ExtResource("3_1ryms")
