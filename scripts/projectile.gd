@@ -6,10 +6,6 @@ extends Area2D
 
 var linear_velocity: Vector2 = Vector2.ZERO
 
-@onready var screen_size := get_viewport_rect().size
-## Adds half the sprite's (scaled) size to wrapping area so it's fully out of view before wrapping
-@onready var wrap_offset: float = ($Sprite2D.get_rect().size.x / 2) * $Sprite2D.scale.x
-
 
 func _ready():
 	# if the projectile doesn't hit, it disappears after its lifetime
@@ -19,12 +15,6 @@ func _ready():
 
 func _physics_process(delta: float):
 	position += linear_velocity * delta
-
-	# wraps the projectile around the screen
-	transform.origin = Vector2(
-		wrapf(transform.origin.x, -wrap_offset, screen_size.x + wrap_offset),
-		wrapf(transform.origin.y, -wrap_offset, screen_size.y + wrap_offset)
-	)
 
 
 func shoot():

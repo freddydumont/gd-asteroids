@@ -1,5 +1,5 @@
 class_name Player
-extends Entity
+extends WrappableRigidBody2D
 
 signal take_damage
 
@@ -33,7 +33,7 @@ func _ready():
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D):
-	# this calls Entity's same func that allows wrapping around screen
+	# this calls WrappableRigidBody2D's same func that allows wrapping around screen
 	super(state)
 
 	if (

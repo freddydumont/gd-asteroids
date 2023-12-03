@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqxm8k4nx5j16"]
+[gd_scene load_steps=9 format=3 uid="uid://bqxm8k4nx5j16"]
 
 [ext_resource type="Texture2D" uid="uid://brq6c5wxfhydg" path="res://assets/sheet.svg" id="1_lf8a7"]
 [ext_resource type="Script" path="res://scripts/projectile.gd" id="1_t716c"]
+[ext_resource type="Script" path="res://scripts/wrappable_object.gd" id="3_kq77t"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rirs4"]
 atlas = ExtResource("1_lf8a7")
@@ -57,5 +58,8 @@ scale = Vector2(0.45, 0.45)
 sprite_frames = SubResource("SpriteFrames_8mfbl")
 animation = &"hit"
 frame_progress = 0.727586
+
+[node name="WrappableObject2D" type="Node2D" parent="."]
+script = ExtResource("3_kq77t")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

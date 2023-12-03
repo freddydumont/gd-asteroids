@@ -1,4 +1,4 @@
-class_name Entity
+class_name WrappableRigidBody2D
 extends RigidBody2D
 
 @onready var screen_size := get_viewport_rect().size

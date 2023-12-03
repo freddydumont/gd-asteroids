@@ -1,10 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://ciau5jq4j2y88"]
+[gd_scene load_steps=14 format=3 uid="uid://ciau5jq4j2y88"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_7pgts"]
 [ext_resource type="Texture2D" uid="uid://ckxbg2ajjexda" path="res://assets/Wallpaper2d.jpg" id="1_l13w2"]
 [ext_resource type="PackedScene" uid="uid://bmhl4tjaesyu3" path="res://scenes/player.tscn" id="2_0jay4"]
 [ext_resource type="PackedScene" uid="uid://bxfwbsq7x82e8" path="res://asteroid_spawner.tscn" id="5_kxdgd"]
+[ext_resource type="PackedScene" uid="uid://dn0l4f0mhtit4" path="res://scenes/asteroids/octagon_asteroid.tscn" id="6_nra6b"]
+[ext_resource type="PackedScene" uid="uid://c5yghj1u822mt" path="res://scenes/asteroids/square_asteroid.tscn" id="7_ocolt"]
+[ext_resource type="PackedScene" uid="uid://4ype3kjkjd1a" path="res://scenes/asteroids/octagon_asteroid_md.tscn" id="8_bh4sm"]
+[ext_resource type="PackedScene" uid="uid://d3nyy5rjkdei4" path="res://scenes/asteroids/square_asteroid_md.tscn" id="9_nsxsq"]
 [ext_resource type="PackedScene" uid="uid://fcuq0jl3snmg" path="res://scenes/hud.tscn" id="10_08jji"]
+[ext_resource type="Script" path="res://scripts/asteroids/asteroid_scenes.gd" id="10_m4f2i"]
+[ext_resource type="PackedScene" uid="uid://cs58v5g5epmnn" path="res://scenes/asteroids/octagon_asteroid_sm.tscn" id="11_t1yit"]
+[ext_resource type="PackedScene" uid="uid://ciewncdwjmgek" path="res://scenes/asteroids/square_asteroid_sm.tscn" id="12_5jpqi"]
+
+[sub_resource type="Resource" id="Resource_16wqg"]
+resource_local_to_scene = true
+script = ExtResource("10_m4f2i")
+large = Array[PackedScene]([ExtResource("6_nra6b"), ExtResource("7_ocolt")])
+medium = Array[PackedScene]([ExtResource("8_bh4sm"), ExtResource("9_nsxsq")])
+small = Array[PackedScene]([ExtResource("11_t1yit"), ExtResource("12_5jpqi")])
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_7pgts")
@@ -37,6 +51,7 @@ one_shot = true
 autostart = true
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("5_kxdgd")]
+asteroid_scenes = SubResource("Resource_16wqg")
 
 [connection signal="game_over" from="." to="." method="_on_game_over"]
 [connection signal="game_over" from="." to="Player" method="_on_game_game_over"]

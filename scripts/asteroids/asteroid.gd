@@ -1,5 +1,5 @@
 class_name Asteroid
-extends Entity
+extends WrappableRigidBody2D
 
 ## position is global_position of the destroyed asteroid
 signal destroyed(size: AsteroidSize, position: Vector2, velocity: Vector2, rotation: float)
