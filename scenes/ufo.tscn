@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://0optjmpfejq2"]
+[gd_scene load_steps=8 format=3 uid="uid://0optjmpfejq2"]
 
 [ext_resource type="Script" path="res://scripts/ufo/ufo.gd" id="1_7qoe1"]
 [ext_resource type="Texture2D" uid="uid://brq6c5wxfhydg" path="res://assets/sheet.svg" id="1_g105m"]
@@ -11,8 +11,15 @@ region = Rect2(549, 215, 91, 92)
 [sub_resource type="CircleShape2D" id="CircleShape2D_1gjpv"]
 radius = 46.0109
 
+[sub_resource type="Gradient" id="Gradient_toa2u"]
+offsets = PackedFloat32Array(0, 0.529801)
+
+[sub_resource type="Gradient" id="Gradient_ce5yj"]
+offsets = PackedFloat32Array(0.241722, 0.546358)
+
 [node name="UFO" type="CharacterBody2D"]
 scale = Vector2(0.5, 0.5)
+collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_7qoe1")
 
@@ -24,3 +31,22 @@ shape = SubResource("CircleShape2D_1gjpv")
 
 [node name="WrappableObject2D" type="Node2D" parent="."]
 script = ExtResource("3_1ryms")
+
+[node name="Explosion" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 1000
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.8
+randomness = 0.5
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_sphere_radius = 4.0
+spread = 180.0
+gravity = Vector2(2.08165e-12, 2.08165e-12)
+initial_velocity_min = 300.0
+initial_velocity_max = 600.0
+scale_amount_max = 2.5
+color = Color(0.784314, 0.784314, 0.784314, 1)
+color_ramp = SubResource("Gradient_toa2u")
+color_initial_ramp = SubResource("Gradient_ce5yj")

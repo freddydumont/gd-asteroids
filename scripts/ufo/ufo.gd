@@ -1,6 +1,8 @@
 class_name UFO
 extends CharacterBody2D
 
+signal destroyed
+
 enum SpawnSide { LEFT, RIGHT }
 
 ## Y-axis offset to prevent spawn in corners
@@ -32,6 +34,7 @@ func _process(delta: float) -> void:
 		current_angle += randf_range(-max_angle_change, max_angle_change)
 		velocity = Vector2(cos(current_angle), sin(current_angle)).normalized() * speed
 
+	# TODO: detect collisions with asteroids
 	move_and_collide(velocity * delta)
 
 
@@ -53,3 +56,17 @@ func spawn_ufo() -> void:
 	spawn_position.y = randf_range(spawn_offset, screen_size.y - spawn_offset)
 
 	global_position = spawn_position
+
+
+func hit():
+	collision_layer = 0
+	collision_mask = 0
+	$Sprite2D.hide()
+
+	destroyed.emit()
+	# TODO: drop powerup
+
+	var explosion: CPUParticles2D = $Explosion
+	explosion.emitting = true
+	await get_tree().create_timer(explosion.lifetime).timeout
+	queue_free()

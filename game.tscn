@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://ciewncdwjmgek" path="res://scenes/asteroids/square_asteroid_sm.tscn" id="12_5jpqi"]
 [ext_resource type="PackedScene" uid="uid://esgi7wd5tch0" path="res://scenes/ufo_spawner.tscn" id="13_vq8wd"]
 
-[sub_resource type="Resource" id="Resource_ohj3c"]
+[sub_resource type="Resource" id="Resource_1bbjl"]
 resource_local_to_scene = true
 script = ExtResource("10_m4f2i")
 large = Array[PackedScene]([ExtResource("6_nra6b"), ExtResource("7_ocolt")])
@@ -52,7 +52,7 @@ one_shot = true
 autostart = true
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("5_kxdgd")]
-asteroid_scenes = SubResource("Resource_ohj3c")
+asteroid_scenes = SubResource("Resource_1bbjl")
 
 [node name="UFOSpawner" parent="." instance=ExtResource("13_vq8wd")]
 
