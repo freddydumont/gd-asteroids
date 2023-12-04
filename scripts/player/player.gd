@@ -108,3 +108,10 @@ func _on_game_game_over():
 	explosion.emitting = true
 	await get_tree().create_timer(explosion.lifetime).timeout
 	queue_free()
+
+
+## when hit by something other than asteroids
+func hit():
+	if not is_invulnerable:
+		take_damage.emit()
+		is_invulnerable = true

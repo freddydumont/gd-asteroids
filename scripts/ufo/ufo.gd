@@ -36,8 +36,16 @@ func _process(delta: float) -> void:
 		current_angle += randf_range(-max_angle_change, max_angle_change)
 		velocity = Vector2(cos(current_angle), sin(current_angle)).normalized() * speed
 
-	# TODO: detect collisions with asteroids
-	move_and_collide(velocity * delta)
+	var collision := move_and_collide(velocity * delta)
+
+	if collision:
+		var collider := collision.get_collider()
+
+		if not (collider is Projectile):
+			hit(0)
+
+		if collider is Player:
+			collider.hit()
 
 
 func spawn_ufo() -> void:
@@ -67,6 +75,7 @@ func hit(points: int = UFO_POINTS):
 	$Sprite2D.hide()
 
 	destroyed.emit(points)
+	# TODO: play destruction sound
 	# TODO: drop powerup
 
 	var explosion: CPUParticles2D = $Explosion
