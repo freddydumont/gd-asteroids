@@ -22,7 +22,7 @@ func _on_ufo_timer_timeout():
 	add_child(ufo)
 
 
-func _on_ufo_destroyed():
+func _on_ufo_destroyed(_points: int):
 	start_ufo_timer()
 
 

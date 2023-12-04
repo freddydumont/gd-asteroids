@@ -1,9 +1,11 @@
 class_name UFO
 extends CharacterBody2D
 
-signal destroyed
+signal destroyed(points: int)
 
 enum SpawnSide { LEFT, RIGHT }
+
+const UFO_POINTS := 500
 
 ## Y-axis offset to prevent spawn in corners
 @export var spawn_offset: float = 120
@@ -58,12 +60,13 @@ func spawn_ufo() -> void:
 	global_position = spawn_position
 
 
-func hit():
+## points will be set to zero if an asteroid destroys it
+func hit(points: int = UFO_POINTS):
 	collision_layer = 0
 	collision_mask = 0
 	$Sprite2D.hide()
 
-	destroyed.emit()
+	destroyed.emit(points)
 	# TODO: drop powerup
 
 	var explosion: CPUParticles2D = $Explosion

@@ -3,8 +3,6 @@ extends Node2D
 
 signal game_over
 
-const UFO_POINTS := 500
-
 ## how many lives the player has
 @export var lives_left := 4
 
@@ -46,8 +44,8 @@ func _on_asteroid_spawner_score_updated(points: int):
 	$HUD.update_score(score)
 
 
-func _on_ufo_destroyed():
-	score += UFO_POINTS
+func _on_ufo_destroyed(points: int):
+	score += points
 	$HUD.update_score(score)
 
 
