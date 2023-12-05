@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://0optjmpfejq2"]
+[gd_scene load_steps=10 format=3 uid="uid://0optjmpfejq2"]
 
 [ext_resource type="Script" path="res://scripts/ufo/ufo.gd" id="1_7qoe1"]
 [ext_resource type="Texture2D" uid="uid://brq6c5wxfhydg" path="res://assets/sheet.svg" id="1_g105m"]
 [ext_resource type="Script" path="res://scripts/wrappable_object.gd" id="3_1ryms"]
 [ext_resource type="AudioStream" uid="uid://d0pngoxhd3u0r" path="res://assets/sfx/ufo_explosion.ogg" id="4_3a2tc"]
+[ext_resource type="AudioStream" uid="uid://btcvklhe846p3" path="res://assets/sfx/ufo.wav" id="5_0kiab"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8qf8c"]
 atlas = ExtResource("1_g105m")
@@ -55,3 +56,8 @@ color_initial_ramp = SubResource("Gradient_ce5yj")
 [node name="UFODestroyed" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_3a2tc")
 volume_db = -5.0
+
+[node name="UFOSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_0kiab")
+volume_db = -15.0
+autoplay = true

@@ -73,6 +73,7 @@ func hit(points: int = UFO_POINTS):
 	collision_layer = 0
 	collision_mask = 0
 	$Sprite2D.hide()
+	$UFOSound.stop()
 
 	destroyed.emit(points)
 	$Explosion.emitting = true
