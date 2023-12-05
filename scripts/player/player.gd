@@ -26,6 +26,8 @@ var is_on_cooldown: bool = false
 var thrust := Vector2.ZERO
 var rotation_dir := 0.0
 
+@onready var thrust_audio: AudioStreamPlayer = $Thrust
+
 
 func _ready():
 	# place the player at the center of the screen
@@ -49,8 +51,14 @@ func _integrate_forces(state: PhysicsDirectBodyState2D):
 # https://kidscancode.org/godot_recipes/4.x/physics/asteroids_physics/index.html
 func _physics_process(_delta):
 	thrust = Vector2.ZERO
+
 	if Input.is_action_pressed("thrust"):
 		thrust = transform.x * thrust_force
+		thrust_audio.play()
+
+	if Input.is_action_just_released("thrust"):
+		await get_tree().create_timer(0.2).timeout
+		thrust_audio.stop()
 
 	rotation_dir = Input.get_axis("rotate_left", "rotate_right")
 
