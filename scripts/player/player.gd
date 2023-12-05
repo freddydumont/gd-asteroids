@@ -27,6 +27,7 @@ var thrust := Vector2.ZERO
 var rotation_dir := 0.0
 
 @onready var thrust_audio: AudioStreamPlayer = $Thrust
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready():
@@ -69,14 +70,14 @@ func _physics_process(_delta):
 func _process(delta: float):
 	# play invulnerability animation and reset invulnerability
 	if is_invulnerable:
-		if not $AnimationPlayer.is_playing():
-			$AnimationPlayer.play("invulnerability")
+		if not animation_player.is_playing():
+			animation_player.play("invulnerability")
 			$ShieldUp.play()
 
 		time_since_invulnerable += delta
 		if time_since_invulnerable >= invulnerability_seconds:
 			is_invulnerable = false
-			$AnimationPlayer.stop()
+			animation_player.stop()
 			$ShieldDown.play()
 			time_since_invulnerable = 0.0
 
