@@ -75,10 +75,11 @@ func hit(points: int = UFO_POINTS):
 	$Sprite2D.hide()
 
 	destroyed.emit(points)
-	# TODO: play destruction sound
+	$Explosion.emitting = true
+
 	# TODO: drop powerup
 
-	var explosion: CPUParticles2D = $Explosion
-	explosion.emitting = true
-	await get_tree().create_timer(explosion.lifetime).timeout
+	var sfx: AudioStreamPlayer = $UFODestroyed
+	sfx.play()
+	await sfx.finished
 	queue_free()
