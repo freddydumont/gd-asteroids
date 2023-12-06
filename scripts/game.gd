@@ -2,6 +2,7 @@ class_name Game
 extends Node2D
 
 signal game_over
+signal level_started(level: int)
 
 ## how many lives the player has
 @export var lives_left := 4
@@ -19,6 +20,7 @@ func _ready():
 
 func _on_start_timer_timeout():
 	$HUD/Messages/Label.hide()
+	level_started.emit(level)
 
 
 func _on_player_take_damage():
