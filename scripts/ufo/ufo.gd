@@ -48,6 +48,7 @@ func _process(delta: float) -> void:
 			collider.hit()
 
 
+# TODO: make sure it doesn't spawn on an asteroid
 func spawn_ufo() -> void:
 	var spawn_position := Vector2.ZERO
 	current_angle = randf_range(-PI / 4, PI / 4)
